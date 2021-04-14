@@ -1,7 +1,7 @@
 # URL SHORTENER
 - A url shortener API built with rails and graphql
 
-
+[![Build Status](https://travis-ci.com/NonsoAmadi10/UrlShortener.svg?branch=main)](https://travis-ci.com/NonsoAmadi10/UrlShortener)
 
 ## Technologies used:
 
