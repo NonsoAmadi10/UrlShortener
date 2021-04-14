@@ -1,0 +1,27 @@
+language: ruby
+dist: trusty
+cache:
+  - bundler
+  - yarn
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+  
+env:
+  global:
+  - PGPORT=5432
+  - PGUSER=travis
+before_install:
+  - nvm install --lts
+  - gem install bundler:2.2.13
+  - bundle lock --add-platform ruby x86-mingw32 x64-mingw32
+  
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - bundle install --jobs=3 --retry=3
+  - yarn
+  - bundle exec rake db:create
+  - bundle exec rake db:schema:load
+script:
+  - bundle exec rake spec
